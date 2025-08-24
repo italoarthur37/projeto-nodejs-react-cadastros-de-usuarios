@@ -49,6 +49,16 @@ function Home() {
       alert(error.response?.data?.error || 'Erro ao cadastrar usuário.')
     }
   }
+  async function deleteUser(id) {
+    try {
+      await api.delete(`/usuarios/${id}`)
+      getUsers() // atualiza a lista
+    } catch (error) {
+      console.error('Erro ao deletar usuário:', error)
+      alert(error.response?.data?.error || 'Erro ao deletar usuário.')
+    }
+  }
+  
 
   useEffect(() => {
     getUsers()
@@ -73,7 +83,7 @@ function Home() {
           </div>
 
           <div>
-            <button>
+            <button type="button" onClick={() => deleteUser(index)}>
               <img src={Trash} alt="Excluir" style={{ width: '50px' }} />
             </button>
           </div>
